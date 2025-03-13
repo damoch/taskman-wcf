@@ -2,15 +2,16 @@
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System;
+using System.Threading.Tasks;
 
 [ServiceContract]
 public interface ITaskService
 {
     [OperationContract]
-    void AddTask(string description);
+    Task AddTask(string description);
 
     [OperationContract]
-    List<TaskItem> GetTasks();
+    Task<List<TaskItem>> GetTasks();
 }
 
 [DataContract]

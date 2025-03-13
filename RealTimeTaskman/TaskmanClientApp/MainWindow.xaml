@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListBox x:Name="TaskList" Grid.Row="0" Margin="10"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+            <TextBox x:Name="TaskInput" Width="300" Margin="0,0,10,0"/>
+            <Button Content="Add Task" Click="AddTask_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

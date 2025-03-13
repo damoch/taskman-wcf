@@ -15,18 +15,21 @@ namespace TaskmanClientApp.TaskServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CompositeType", Namespace="http://schemas.datacontract.org/2004/07/TaskmanService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TaskItem", Namespace="http://schemas.datacontract.org/2004/07/")]
     [System.SerializableAttribute()]
-    public partial class CompositeType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class TaskItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool BoolValueField;
+        private System.DateTime CreatedAtField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StringValueField;
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -39,27 +42,40 @@ namespace TaskmanClientApp.TaskServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool BoolValue {
+        public System.DateTime CreatedAt {
             get {
-                return this.BoolValueField;
+                return this.CreatedAtField;
             }
             set {
-                if ((this.BoolValueField.Equals(value) != true)) {
-                    this.BoolValueField = value;
-                    this.RaisePropertyChanged("BoolValue");
+                if ((this.CreatedAtField.Equals(value) != true)) {
+                    this.CreatedAtField = value;
+                    this.RaisePropertyChanged("CreatedAt");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StringValue {
+        public string Description {
             get {
-                return this.StringValueField;
+                return this.DescriptionField;
             }
             set {
-                if ((object.ReferenceEquals(this.StringValueField, value) != true)) {
-                    this.StringValueField = value;
-                    this.RaisePropertyChanged("StringValue");
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }
@@ -78,17 +94,17 @@ namespace TaskmanClientApp.TaskServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TaskServiceReference.ITaskService")]
     public interface ITaskService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/GetData", ReplyAction="http://tempuri.org/ITaskService/GetDataResponse")]
-        string GetData(int value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/AddTask", ReplyAction="http://tempuri.org/ITaskService/AddTaskResponse")]
+        void AddTask(string description);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/GetData", ReplyAction="http://tempuri.org/ITaskService/GetDataResponse")]
-        System.Threading.Tasks.Task<string> GetDataAsync(int value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/AddTask", ReplyAction="http://tempuri.org/ITaskService/AddTaskResponse")]
+        System.Threading.Tasks.Task AddTaskAsync(string description);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/ITaskService/GetDataUsingDataContractResponse")]
-        TaskmanClientApp.TaskServiceReference.CompositeType GetDataUsingDataContract(TaskmanClientApp.TaskServiceReference.CompositeType composite);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/GetTasks", ReplyAction="http://tempuri.org/ITaskService/GetTasksResponse")]
+        TaskmanClientApp.TaskServiceReference.TaskItem[] GetTasks();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/ITaskService/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<TaskmanClientApp.TaskServiceReference.CompositeType> GetDataUsingDataContractAsync(TaskmanClientApp.TaskServiceReference.CompositeType composite);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITaskService/GetTasks", ReplyAction="http://tempuri.org/ITaskService/GetTasksResponse")]
+        System.Threading.Tasks.Task<TaskmanClientApp.TaskServiceReference.TaskItem[]> GetTasksAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -118,20 +134,20 @@ namespace TaskmanClientApp.TaskServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public string GetData(int value) {
-            return base.Channel.GetData(value);
+        public void AddTask(string description) {
+            base.Channel.AddTask(description);
         }
         
-        public System.Threading.Tasks.Task<string> GetDataAsync(int value) {
-            return base.Channel.GetDataAsync(value);
+        public System.Threading.Tasks.Task AddTaskAsync(string description) {
+            return base.Channel.AddTaskAsync(description);
         }
         
-        public TaskmanClientApp.TaskServiceReference.CompositeType GetDataUsingDataContract(TaskmanClientApp.TaskServiceReference.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContract(composite);
+        public TaskmanClientApp.TaskServiceReference.TaskItem[] GetTasks() {
+            return base.Channel.GetTasks();
         }
         
-        public System.Threading.Tasks.Task<TaskmanClientApp.TaskServiceReference.CompositeType> GetDataUsingDataContractAsync(TaskmanClientApp.TaskServiceReference.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContractAsync(composite);
+        public System.Threading.Tasks.Task<TaskmanClientApp.TaskServiceReference.TaskItem[]> GetTasksAsync() {
+            return base.Channel.GetTasksAsync();
         }
     }
 }
