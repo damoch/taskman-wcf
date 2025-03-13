@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskmanClientApp", "TaskmanClientApp\TaskmanClientApp.csproj", "{A11FB1C9-5783-4FA3-B5AC-D7BC7B397444}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskmanService", "TaskmanService\TaskmanService.csproj", "{8445DF67-F34B-43D7-959F-7E42C9DE08C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A11FB1C9-5783-4FA3-B5AC-D7BC7B397444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A11FB1C9-5783-4FA3-B5AC-D7BC7B397444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A11FB1C9-5783-4FA3-B5AC-D7BC7B397444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A11FB1C9-5783-4FA3-B5AC-D7BC7B397444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8445DF67-F34B-43D7-959F-7E42C9DE08C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8445DF67-F34B-43D7-959F-7E42C9DE08C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8445DF67-F34B-43D7-959F-7E42C9DE08C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8445DF67-F34B-43D7-959F-7E42C9DE08C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
