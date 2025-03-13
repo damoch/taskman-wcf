@@ -1,33 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using TaskmanService.Messaging;
 
-namespace TaskmanService
+public class TaskService : ITaskService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
-    public class TaskService : ITaskService
+    private readonly string _connectionString;// = "Server=localhost;Database=TasksDB;Trusted_Connection=True;";
+    public TaskService()
     {
-        public string GetData(int value)
-        {
-            return string.Format("You entered: {0}", value);
-        }
+        _connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString;
+    }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+    public void AddTask(string description)
+    {
+        using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            if (composite == null)
+            conn.Open();
+            string query = "INSERT INTO Tasks (Description) VALUES (@Description)";
+            using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                throw new ArgumentNullException("composite");
+                cmd.Parameters.AddWithValue("@Description", description);
+                cmd.ExecuteNonQuery();
             }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
         }
+        TaskHub.NotifyNewTask(description);
+    }
+
+    public List<TaskItem> GetTasks()
+    {
+        List<TaskItem> tasks = new List<TaskItem>();
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            conn.Open();
+            string query = "SELECT Id, Description, CreatedAt FROM Tasks";
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    tasks.Add(new TaskItem
+                    {
+                        Id = reader.GetInt32(0),
+                        Description = reader.GetString(1),
+                        CreatedAt = reader.GetDateTime(2)
+                    });
+                }
+            }
+        }
+        return tasks;
     }
 }
